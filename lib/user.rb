@@ -5,12 +5,8 @@ class User < ActiveRecord::Base
   has_many :avatars
   before_create :first_adventure
   scope :creator?, -> {where(name: 'blnkt', bio: "Content&Code", fave: 'The Princess Bride').first_or_create do |user|
-    user.avatar_id = Avatar.find_by(avatar: '~<(@)-}')
+    user.avatar_id = Avatar.find_or_create_by({avatar: '~<(@)-}'}).id
   end}
-
-  # def the_beginning
-  # 	@the_beginning
-  # end
 
   def first_adventure
     @the_beginning = Adventure.create(user_id: self.id)

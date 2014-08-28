@@ -12,49 +12,53 @@ def welcome
 	puts "It's time for adventuring.  What's your name?"
 	user_name = gets.chomp
   unless User.find_by name: user_name
-    new_user(user_name)
+    @current_user = new_user(user_name)
+    p @current_user
   else
     potential_user = User.find_by name: user_name
+    p potential_user
     potential_avatar = Avatar.find_by id: potential_user.avatar_id
     puts "Is this avatar yours? (y/n)"
     puts "#{potential_avatar.avatar}"
     case gets.chomp.downcase
     when 'y'
-      current_user = potential_user    
-      # print "#{@user.adventures.last.chapters.first}"
+      @current_user = potential_user    
     when 'n'
-      new_user(user_name)
+      @current_user = new_user(user_name)
     end
   end
-  #menu(@user, @user.adventures.last.chapters.first)
+  menu(@current_user)
 end
 
 def new_user name
   puts "It looks like this is your first adventure.  Can I call you #{name}? (y/n)"
   case gets.chomp.downcase
   when 'y'  
-    new_user = User.create(name: name)
+    @new_user = User.create(name: name)
+    profile(@new_user)
   when 'n'
     puts "Please enter a name for adventuring:"
-    new_user = User.create({name: gets.chomp})
-    new_user.the_beginning.add_chapter(Chapter.prologue)
+    @new_user = User.create({name: gets.chomp})
+    profile(@new_user)
   else
     puts "That didn't seem right..."
     sleep 1
     clear_screen
     new_user(name)
   end
+  @new_user
 end
 
 
 def prologue_runner
-  User.creator_avatar?
+  Avatar.creator_avatar?
   User.creator?
   Chapter.prologue
 end
 
-def menu(user, chapter)
-  @user  = user
+def menu(user)
+  p user.adventures.last.chapters.last
+  current_chapter  = user.adventures.last.chapters.last
   @chapter = chapter
   clear_screen
   print @chapter
@@ -94,43 +98,43 @@ def menu(user, chapter)
   menu(@user, @chapter)
 end
 
-# def profile user
-#   clear_screen
-#   loop do
-#     puts "Looks like your profile is incomplete."
-#     if user.avatar_id == nil
-#       new_avatar(user)
-#     elsif user.bio == nil 
-#       new_bio(user)
-#     elsif user.fave == nil
-#       new_fave(user)
-#     else
-#       clear_screen
-#       break
-#     end
-#   end
-#   puts user.name.upcase
-#   puts Avatar.find(user.avatar_id)
-#   puts "Bio:" + user.bio.to_s
-#   puts "#{user.name}'s favorite adventure:" + user.fave.to_s
-#   puts "Enter 'a' to edit your avatar"
-#   puts "Enter 'b' to edit your biography"
-#   puts "Enter 'f' to edit your favorite adventure (book, movie, life, etc.)"
-#   puts "Enter 'm' to return to the adventure"
-#   case gets.chomp
-#   when 'a'
-#     new_avatar(user)
-#   when 'b'
-#     new_bio(user)
-#   when 'f'
-#     new_fave(user)
-#   when 'm'
-#     menu(user, user.adventures.last.chapters.last)
-#   else
-#     profile(user)
-#   end
-#   profile(user)
-# end
+def profile user
+  clear_screen
+  loop do
+    puts "Looks like your profile is incomplete."
+    if user.avatar_id == nil
+      new_avatar(user)
+    elsif user.bio == nil 
+      new_bio(user)
+    elsif user.fave == nil
+      new_fave(user)
+    else
+      clear_screen
+      break
+    end
+  end
+  puts user.name.upcase
+  puts Avatar.find(user.avatar_id)
+  puts "Bio:" + user.bio.to_s
+  puts "#{user.name}'s favorite adventure:" + user.fave.to_s
+  puts "Enter 'a' to edit your avatar"
+  puts "Enter 'b' to edit your biography"
+  puts "Enter 'f' to edit your favorite adventure (book, movie, life, etc.)"
+  puts "Enter 'm' to return to the adventure"
+  case gets.chomp
+  when 'a'
+    new_avatar(user)
+  when 'b'
+    new_bio(user)
+  when 'f'
+    new_fave(user)
+  when 'm'
+    menu(user, user.adventures.last.chapters.last)
+  else
+    profile(user)
+  end
+  profile(user)
+end
 
 # def new_avatar user
 #   Avatar.all.each do |avatar|
