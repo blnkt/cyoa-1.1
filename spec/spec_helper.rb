@@ -8,5 +8,6 @@ RSpec.configure do |config|
     Adventure.all.each { |task| task.destroy }
     User.all.each { |task| task.destroy }
     Chapter.all.each { |task| task.destroy }
+    Avatar.all.each { |task| task.destroy }
   end
 end
