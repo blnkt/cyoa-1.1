@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828031800) do
+ActiveRecord::Schema.define(version: 20140828032739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140828031800) do
   create_table "avatars", force: true do |t|
     t.text    "avatar"
     t.integer "user_id"
+    t.string  "name"
   end
 
   create_table "chapters", force: true do |t|
@@ -38,7 +39,6 @@ ActiveRecord::Schema.define(version: 20140828031800) do
 
   create_table "users", force: true do |t|
     t.string  "name"
-    t.string  "hashed_password"
     t.integer "avatar_id"
     t.text    "bio"
     t.string  "fave"
