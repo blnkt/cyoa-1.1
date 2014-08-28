@@ -13,7 +13,7 @@ class Chapter < ActiveRecord::Base
 
   def add_choice prompt
     choice = Chapter.create(prompt: prompt, episode: "\nYour Princess is in another castle: \nEnter 'ae' to add an episode to this chapter\n", parent_chapter_id: self.id)
-    self.choices << Chapter.create()
+    self.choices << choice
     choice.update(parent_chapter_id: self.id)
   end
 end 

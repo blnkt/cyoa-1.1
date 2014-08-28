@@ -9,7 +9,7 @@ class Adventure < ActiveRecord::Base
       self.chapters << chapter
     else
       branch = Adventure.create(user_id: self.user_id)
-      self.chapters.pop(2).each { |chapter| branch.chapters << chapter }
+      self.chapters.slice[0..-2].each { |chapter| branch.chapters << chapter }
     end
   end
 end
