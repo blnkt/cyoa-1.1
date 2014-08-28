@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :adventures
   has_many :avatars
-  before_create :first_adventure
+  after_create :first_adventure
   scope :creator?, -> {where(name: 'blnkt', bio: "Content&Code", fave: 'The Princess Bride').first_or_create do |user|
     user.avatar_id = Avatar.find_or_create_by({avatar: '~<(@)-}'}).id
   end}

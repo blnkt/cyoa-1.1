@@ -8,7 +8,7 @@ ActiveRecord::Base.establish_connection(development_configuration)
 
 def welcome
   clear_screen
-  prologue_runner
+  User.creator?
 	puts "It's time for adventuring.  What's your name?"
 	user_name = gets.chomp
   unless User.find_by name: user_name
@@ -16,7 +16,7 @@ def welcome
     p @current_user
   else
     potential_user = User.find_by name: user_name
-    p potential_user
+    p potential_user.adventures
     potential_avatar = Avatar.find_by id: potential_user.avatar_id
     puts "Is this avatar yours? (y/n)"
     puts "#{potential_avatar.avatar}"
@@ -50,14 +50,12 @@ def new_user name
 end
 
 
-def prologue_runner
-  Avatar.creator_avatar?
-  User.creator?
-  Chapter.prologue
-end
+# def prologue_runner
+#   User.creator?
+# end
 
 def menu(user)
-  p user.adventures.last.chapters.last
+  p user.adventures
   current_chapter  = user.adventures.last.chapters.last
   @chapter = chapter
   clear_screen

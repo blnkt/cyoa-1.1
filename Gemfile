@@ -4,6 +4,7 @@ gem 'activerecord'
 gem 'active_record_migrations'
 gem 'pg'
 gem 'bcrypt'
+gem 'pry'
 
 group :test do
   gem 'rspec'
