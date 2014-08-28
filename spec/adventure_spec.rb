@@ -7,7 +7,7 @@ it {should belong_to :user}
 it { should validate_presence_of :user }
 
   describe "#add_chapter" do
-    it "add a chapter to an adventurer's progress" do
+    it "add a chapter to an adventure" do
       new_user = User.create(name: 'billy')
       new_adventure = Adventure.create(user_id: new_user.id)
       unexpected_astronaut = Chapter.create({prompt: "Unexpected Astronaut"})

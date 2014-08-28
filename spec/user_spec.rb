@@ -33,4 +33,14 @@ describe User do
       expect(me.adventures.last).to eq(new_adventure)
     end
   end
+
+    describe "#add_to_progress" do
+    it "add a chapter to an adventurer's progress" do
+      new_user = User.create(name: 'billy')
+      new_user.first_adventure
+      unexpected_astronaut = Chapter.create({prompt: "Unexpected Astronaut"})
+      new_user.add_to_progress(unexpected_astronaut)
+      expect(new_user.adventures.last.chapters.last).to eq(unexpected_astronaut)
+    end
+  end
 end
