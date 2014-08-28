@@ -13,14 +13,5 @@ class Chapter < ActiveRecord::Base
     choice = Chapter.create(prompt: prompt, episode: "\nYour Princess is in another castle: \nEnter 'ae' to add an episode to this chapter\n", parent_chapter_id: self.id)
     self.choices << Chapter.create
     choice.update(parent_chapter_id: self.id)
-  #   if @@chapt ers.length == 1
-  #     @id = 0
-  #     Chapter.new({episode: "\nYour Princess is in another castle: \nEnter 'ae' to add an episode to this chapter\n", prompt: choice, parent_chapter: @id, id: (@id + 1), adventure_id: adventure_id})
-  #     @choices << @id + 1
-  #   else
-  #     next_id = @@chapters.length
-  #     Chapter.new({episode: "\nYour Princess is in another castle: \nEnter 'ae' to add an episode to this chapter\n", prompt: choice, parent_chapter: @id, id: next_id, adventure_id: adventure_id})
-  #     @choices << next_id
-  #   end
   end
-end
+end 
