@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	attr_accessor :new_password, :new_password_confirmation, :first_adventure
+  
 	has_many :adventures
+  has_many :avatars
 
 	# validates_confirmation_of :new_password, :if=>:password_changed?
  #  before_save :hash_new_password, :if => :password_changed?
@@ -10,22 +12,13 @@ class User < ActiveRecord::Base
   
 
 
-  # def add_avatar name
-  # 	case name
-  # 	when 'human'
-  # 		@avatar = "(]-_-[)"
-  # 	when 'bear'
-  # 		@avatar = "⊂(^( )^)⊃"
-  #   when 'penguin'
-  #   	@avatar = "ᶘᵒᴥᵒᶅ"
-  #   when 'joker'
-	 #    @avatar = "(♠_♦)"
-  #   when 'kazoo'
-	 #    @avatar = "( ͡°ʖ͡°)"
-  #   else
-  #   	@avatar = name
-  #   end
-  # end
+  def add_avatar name
+  	if Avatar.find(name)
+  	  User.update(avatar_id: name)
+    else
+    	Avatar.create({image: name})
+    end
+  end
 
   # def add_bio bio
   # 	@bio = bio
