@@ -13,16 +13,15 @@ def welcome
 	user_name = gets.chomp
   unless User.find_by name: user_name
     @current_user = new_user(user_name)
-    p @current_user
   else
     potential_user = User.find_by name: user_name
-    p potential_user.adventures
     potential_avatar = Avatar.find_by id: potential_user.avatar_id
     puts "Is this avatar yours? (y/n)"
     puts "#{potential_avatar.avatar}"
     case gets.chomp.downcase
     when 'y'
-      @current_user = potential_user    
+      @current_user = potential_user   
+       
     when 'n'
       @current_user = new_user(user_name)
     end

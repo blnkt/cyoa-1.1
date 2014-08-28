@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
     @the_beginning = Adventure.create(user_id: self.id)
     @the_beginning.add_chapter(Chapter.prologue)
   end
+
+  def add_adventure adventure
+  	self.adventures << adventure
+  end
 end

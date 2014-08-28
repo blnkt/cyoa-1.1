@@ -4,6 +4,7 @@ describe User do
 
   it { should have_many :adventures }
   it { should have_many :avatars }
+  it { should }
 
   describe '.creator?' do
     it 'makes creator if isnt present in the database already' do
@@ -23,17 +24,13 @@ describe User do
       expect(me.the_beginning.chapters.first.prompt).to eq('Welcome to the Adventure')
     end
   end
-      
-
-
-  # describe '#add_avatar' do
-  #   it 'add an avatar to the Users profile' do
-  #     User1 = User.new({name: 'Neil Gaiman'})
-  #     guinotar = Avatar.create({avatar: 'ᶘᵒᴥᵒᶅ', name:'penguin'})
-  #     User1.add_avatar('1')
-  #     User3.add_avatar('%>?<@')
-  #     expect(User1.avatar).to eq("ᶘᵒᴥᵒᶅ")
-  #     expect(User3.avatar).to eq('%>?<@')
-  #   end
-  # end
+  
+  describe '#add_adventure' do
+    it 'adds an adventure to users experience' do
+      me = User.create({name: 'bob'})
+      new_adventure = Adventure.create(user_id: me.id)
+      me.add_adventure(new_adventure)
+      expect(me.adventures.last).to eq(new_adventure)
+    end
+  end
 end
