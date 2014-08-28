@@ -5,6 +5,7 @@ class Chapter < ActiveRecord::Base
   belongs_to :parent_chapter, class_name: 'Chapter'
 
   scope :prologue, -> {find_or_create_by(prompt: "Welcome to the Adventure") do |chapter| 
+    chapter.episode = "You awake in a field..."
     chapter.add_choice("pick up the keys and walk to the road")
     chapter.add_choice("Walk the bike out of the field to a nearby road")
     chapter.add_choice("Put on the hat and head towards the sound of water")
