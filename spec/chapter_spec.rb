@@ -5,13 +5,13 @@ describe Chapter do
 	it { should have_many :choices }
 	it { should belong_to  :parent_chapter }
 
-	describe '#add_episode' do
-	  it "add an episode text to a chapter" do
-	  	unexpected_astronaut = Chapter.create({prompt: "Unexpected Astronaut"})
-	  	unexpected_astronaut.add_episode("No one ever expects the unexpected astronaut")
-	  	expect(unexpected_astronaut.episode).to eq("No one ever expects the unexpected astronaut")
-	  end
-	end
+	# describe '#add_episode' do
+	#   it "add an episode text to a chapter" do
+	#   	unexpected_astronaut = Chapter.create({prompt: "Unexpected Astronaut"})
+	#   	unexpected_astronaut.add_episode("No one ever expects the unexpected astronaut")
+	#   	expect(unexpected_astronaut.episode).to eq("No one ever expects the unexpected astronaut")
+	#   end
+	# end
 
 	describe '#add_choice' do
 	  it "add a choice to a chapter" do
