@@ -3,8 +3,7 @@ class Chapter < ActiveRecord::Base
   has_and_belongs_to_many :adventures
   has_many :choices, class_name: 'Chapter', foreign_key: 'parent_chapter_id'
   belongs_to :parent_chapter, class_name: 'Chapter'
-  @@chapters = []
-
+  
   def add_episode episode
     self.update(episode: episode.to_s)
   end

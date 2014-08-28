@@ -17,7 +17,6 @@ describe Chapter do
 	  it "add a choice to a chapter" do
 	    beatles_chapter = Chapter.create({prompt: "glasses", episode: "they came in through the bathroom window"})
 	    beatles_chapter.add_choice('there is no silver spoon')
-	    print beatles_chapter.choices.first.episode
 	    expect(beatles_chapter.choices.first.parent_chapter_id).to eq(beatles_chapter.id)
 	  end
 	end
