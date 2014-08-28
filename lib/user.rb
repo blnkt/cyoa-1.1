@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :new_password, :new_password_confirmation, :first_adventure
+  attr_accessor :new_password, :new_password_confirmation, :the_beginning
 
   has_many :adventures
   has_many :avatars
@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
     user.avatar_id = Avatar.find_by(avatar: '~<(@)-}')
   end}
 
+  # def the_beginning
+  # 	@the_beginning
+  # end
+
   def first_adventure
-    Adventure.create(user_id: self.id)
+    @the_beginning = Adventure.create(user_id: self.id)
+    @the_beginning.add_chapter(Chapter.prologue)
   end
 end

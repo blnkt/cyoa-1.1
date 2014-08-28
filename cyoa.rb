@@ -8,7 +8,7 @@ ActiveRecord::Base.establish_connection(development_configuration)
 
 def welcome
   clear_screen
-  prologue_runner(creator)
+  prologue_runner
 	puts "It's time for adventuring.  What's your name?"
 	user_name = gets.chomp
   unless User.find_by name: user_name
@@ -33,10 +33,11 @@ def new_user name
   puts "It looks like this is your first adventure.  Can I call you #{name}? (y/n)"
   case gets.chomp.downcase
   when 'y'  
-    prologue_runner(User.create({name: name}))
+    new_user = User.create(name: name)
   when 'n'
     puts "Please enter a name for adventuring:"
-    prologue_runner(User.create({name: gets.chomp}))
+    new_user = User.create({name: gets.chomp})
+    new_user.the_beginning.add_chapter(Chapter.prologue)
   else
     puts "That didn't seem right..."
     sleep 1
@@ -50,12 +51,6 @@ def prologue_runner
   User.creator_avatar?
   User.creator?
   Chapter.prologue
-  new_adventure = Adventure.create({user_id: user.id})
-  print new_adventure.chapters.first
-  new_adventure.add_chapter(prologue)
-  user.adventures << new_adventure
-  user.id
-
 end
 
 def menu(user, chapter)

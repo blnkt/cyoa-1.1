@@ -15,6 +15,14 @@ describe User do
       expect(User.creator?.name).to eq('blnkt')
     end
   end
+
+  describe '#first_adventure' do
+    it 'starts user off on a new adventure with the prologue' do
+      me = User.create({name: 'bob'})
+      me.first_adventure
+      expect(me.the_beginning.chapters.first.prompt).to eq('Welcome to the Adventure')
+    end
+  end
       
 
 
