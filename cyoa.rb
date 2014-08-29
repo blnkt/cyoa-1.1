@@ -20,7 +20,7 @@ def welcome
     puts "#{potential_avatar.avatar}"
     case gets.chomp.downcase
     when 'y'
-      @current_user = potential_user   
+      @current_user = potential_user
     when 'n'
       @current_user = new_user(user_name)
     end
@@ -31,7 +31,7 @@ end
 def new_user name
   puts "It looks like this is your first adventure.  Can I call you #{name}? (y/n)"
   case gets.chomp.downcase
-  when 'y'  
+  when 'y'
     new_user = User.create(name: name)
     new_user.first_adventure
     profile(new_user)
@@ -94,7 +94,7 @@ def profile user
     puts "Looks like your profile is incomplete."
     if user.avatar_id == nil
       new_avatar(user)
-    elsif user.bio == nil 
+    elsif user.bio == nil
       new_bio(user)
     elsif user.fave == nil
       new_fave(user)
@@ -111,7 +111,6 @@ def profile user
   puts "Enter 'b' to edit your biography"
   puts "Enter 'f' to edit your favorite adventure (book, movie, life, etc.)"
   puts "Enter 'm' to return to the adventure"
-  binding.pry
   case gets.chomp
   when 'a'
     new_avatar(user)
