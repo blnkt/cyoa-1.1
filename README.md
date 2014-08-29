@@ -1,4 +1,4 @@
-Choose Your Own Adventure 1.1.0
+Choose Your Own Adventure 0.2.0
 
 
  About
@@ -10,11 +10,11 @@ Choose Your Own Adventure 1.1.0
 Setup
 
   Download RUBY-choose-your-own-adventure-game and then, in terminal, bundle the gems, create the database, and open cyoa.rb file in terminal.
-  
+
 Dependencies
   * [Ruby](https://www.ruby-lang.org/en/)
   * [Bundler](https://rubygems.org/gems/bundler)
 
-  
+
 Author
  [Blake Mason](http://chancestoriestold.com/)
